@@ -10,12 +10,32 @@
   <style>
     :root {
       --bg: #faf6f2;
-      --text: #b9788e;
+      --text: #9b6038;
       --muted: #d9a3b2;
       --card: #fcf7f9;
       --border: rgba(59,47,47,0.08);
       --accent: #e8acb6;
+      --cream:   #faf6f2;
+  --blush:   #fcf7f9;
+  --rose:    #e9b2b9;
+  --mauve:   #d9a3b2;
+  --berry:   #b9788e;
+  --brown:   #765134;
+  --caramel: #c78b57;
+  --mocha:   #9b6038;
     }
+    
+    body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -2;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 10%,  rgba(233,178,185,0.38) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 70% at 90% 20%,  rgba(199,139,87,0.18)  0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 50% 90%,  rgba(217,163,178,0.30) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 80%,  rgba(185,120,142,0.20) 0%, transparent 55%),
+    var(--cream);
+  animation: meshMove 12s ease-in-out infinite alternate;
+}
 
     * {
       box-sizing: border-box;
@@ -25,7 +45,7 @@
     }
 
     body {
-      background: var(--bg);
+      background: var(--cream);
       color: var(--text);
       line-height: 1.6;
     }
@@ -41,10 +61,12 @@
       margin-bottom: 50px;
     }
 
-    .brand {
-      font-size: 26px;
-      font-weight: 500;
-      margin-bottom: 5px;
+    .brand img {
+      max-width: 140px;
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto 10px;
     }
 
     .subtitle {
@@ -59,16 +81,26 @@
     section h2 {
       font-size: 22px;
       margin-bottom: 20px;
-      border-bottom: 1px solid var(--border);
+      color: var(--accent);
       padding-bottom: 6px;
     }
 
     .card {
-      background: var(--card);
+      background: rgba(255,255,255,0.6);
+	  backdrop-filter: blur(10px);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 24px;
       margin-bottom: 20px;
+
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .step-title {
@@ -105,6 +137,7 @@
       margin-top: 30px;
     }
 
+    /* 🔥 BOTÓN WHATSAPP MEJORADO */
     .whatsapp-btn {
       display: inline-block;
       width: 100%;
@@ -116,18 +149,94 @@
       font-size: 14px;
       font-weight: 500;
       color: #ffffff;
-      background: #25D366;
+
+      background: linear-gradient(145deg, #2bd96b, #20b358);
+
+      box-shadow:
+        0 6px 16px rgba(37, 211, 102, 0.35),
+        inset 0 -2px 4px rgba(0,0,0,0.15),
+        inset 0 2px 4px rgba(255,255,255,0.2);
+
+      transition: all 0.25s ease;
+
+      animation: breathe 3.5s ease-in-out infinite;
     }
+    
+    .glitter-container {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0; overflow: hidden;
+}
+
+.glitter-dot {
+  position: absolute; border-radius: 50%;
+  animation: floatUp linear infinite; opacity: 0;
+}
+
+    .whatsapp-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow:
+        0 10px 22px rgba(37, 211, 102, 0.45),
+        inset 0 -2px 6px rgba(0,0,0,0.2),
+        inset 0 2px 6px rgba(255,255,255,0.25);
+    }
+
+    .whatsapp-btn:active {
+      transform: scale(0.98);
+      box-shadow:
+        0 4px 10px rgba(37, 211, 102, 0.25);
+    }
+
+    @keyframes breathe {
+      0% {
+        transform: scale(1);
+        box-shadow:
+          0 6px 16px rgba(37, 211, 102, 0.35),
+          inset 0 -2px 4px rgba(0,0,0,0.15),
+          inset 0 2px 4px rgba(255,255,255,0.2);
+      }
+
+      50% {
+        transform: scale(1.04);
+        box-shadow:
+          0 12px 28px rgba(37, 211, 102, 0.45),
+          inset 0 -2px 6px rgba(0,0,0,0.2),
+          inset 0 2px 6px rgba(255,255,255,0.25);
+      }
+
+      100% {
+        transform: scale(1);
+        box-shadow:
+          0 6px 16px rgba(37, 211, 102, 0.35),
+          inset 0 -2px 4px rgba(0,0,0,0.15),
+          inset 0 2px 4px rgba(255,255,255,0.2);
+      }
+    }
+    
+    @keyframes meshMove {
+  0%   { filter: hue-rotate(0deg)  brightness(1);    }
+  50%  { filter: hue-rotate(6deg)  brightness(1.03); }
+  100% { filter: hue-rotate(-4deg) brightness(1);    }
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.5; }
+  100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
 
   </style>
 </head>
 
 <body>
+<div class="glitter-container" id="glitterContainer"></div>
 
 <div class="container">
 
 <header>
-  <div class="brand"><img src="https://i.postimg.cc/sgpQ9k0c/T-(6).png" class="step-img"></div>
+  <div class="brand">
+    <img src="https://i.postimg.cc/sgpQ9k0c/T-(6).png">
+  </div>
   <div class="subtitle">¿Cómo utilizar el kit medidor?</div>
 </header>
 
@@ -135,7 +244,7 @@
   <h2>¿Qué es el kit medidor?</h2>
 
   <div class="card highlight">
-    <div class="muted">
+    <div class="body">
       El kit medidor es un muestrario de tips reutilizables con diferentes tamaños que te permite medir tus uñas naturales para crear un set personalizado perfecto para vos.
     </div>
   </div>
@@ -144,7 +253,6 @@
 <section>
   <h2>Paso a paso</h2>
 
-  <!-- PASO 1 -->
   <div class="card">
     <div class="step-title">1. Probá cada tip en tus uñas</div>
     <div class="muted">Colocá cada tip sobre tu uña natural sin pegamento.</div>
@@ -155,7 +263,6 @@
     <img src="https://i.postimg.cc/L6tXkWB6/kit-paso-1.png" class="step-img">
   </div>
 
-  <!-- PASO 2 -->
   <div class="card">
     <div class="step-title">2. Ajuste correcto</div>
     <div class="muted">El tip debe encajar perfectamente sobre tu uña.</div>
@@ -166,7 +273,6 @@
     <img src="https://i.postimg.cc/x19d6Ptg/kit-paso-2.png" class="step-img">
   </div>
 
-  <!-- PASO 3 -->
   <div class="card">
     <div class="step-title">3. Anotá tus medidas</div>
     <div class="muted">Registrá el número correspondiente a cada dedo.</div>
@@ -180,7 +286,6 @@
     <img src="https://i.postimg.cc/PqRrrnhS/kit-paso-3.png" class="step-img">
   </div>
 
-  <!-- PASO 4 -->
   <div class="card">
     <div class="step-title">4. Repetí en ambas manos</div>
     <div class="muted">Las medidas pueden variar entre mano derecha e izquierda.</div>
@@ -191,7 +296,6 @@
     <img src="https://i.postimg.cc/placeholder.png" class="step-img">
   </div>
 
-  <!-- CTA FINAL -->
   <div class="cta-box">
     <div class="muted">¿Estás lista para personalizar tu set?</div>
 
@@ -218,6 +322,39 @@
 </section>
 
 </div>
+
+<script>
+const glitterEl = document.getElementById('glitterContainer');
+const gc = ['#e9b2b9','#d9a3b2','#b9788e','#fcf7f9','#c78b57','#faf6f2'];
+
+function spawnGlitter() {
+  const d = document.createElement('div');
+  d.className = 'glitter-dot';
+  const s = Math.random() * 5 + 2;
+  d.style.cssText = `
+    width:${s}px;height:${s}px;
+    left:${Math.random()*100}%;
+    background:${gc[Math.floor(Math.random()*gc.length)]};
+    animation-duration:${Math.random()*8+7}s;
+  `;
+  glitterEl.appendChild(d);
+  setTimeout(() => d.remove(), 14000);
+}
+
+setInterval(spawnGlitter, 500);
+
+  const cards = document.querySelectorAll('.card');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  cards.forEach(card => observer.observe(card));
+</script>
 
 </body>
 </html>
