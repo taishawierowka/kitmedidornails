@@ -11,11 +11,11 @@
     :root {
       --bg: #faf6f2;
       --text: #9b6038;
-      --muted: #d9a3b2;
+      --muted: #9b6038;
       --card: #fcf7f9;
       --border: rgba(59,47,47,0.08);
       --accent: #e8acb6;
-      --cream:   #765134;
+      --cream:   #ffffff;
   --blush:   #fcf7f9;
   --rose:    #e9b2b9;
   --mauve:   #d9a3b2;
@@ -25,17 +25,7 @@
   --mocha:   #9b6038;
     }
     
-    body::before {
-  content: '';
-  position: fixed; inset: 0; z-index: -2;
-  background:
-    radial-gradient(ellipse 80% 60% at 10% 10%,  rgba(233,178,185,0.38) 0%, transparent 65%),
-    radial-gradient(ellipse 60% 70% at 90% 20%,  rgba(199,139,87,0.18)  0%, transparent 60%),
-    radial-gradient(ellipse 70% 50% at 50% 90%,  rgba(217,163,178,0.30) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 80% 80%,  rgba(185,120,142,0.20) 0%, transparent 55%),
-    var(--cream);
-  animation: meshMove 12s ease-in-out infinite alternate;
-}
+   body::before { content: ''; position: fixed; inset: 0; z-index: -2; background: radial-gradient(ellipse 80% 60% at 10% 10%, rgba(233,178,185,0.38) 0%, transparent 65%), radial-gradient(ellipse 60% 70% at 90% 20%, rgba(199,139,87,0.18) 0%, transparent 60%), radial-gradient(ellipse 70% 50% at 50% 90%, rgba(217,163,178,0.30) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 80% 80%, rgba(185,120,142,0.20) 0%, transparent 55%), var(--blush); animation: meshMove 12s ease-in-out infinite alternate; }
 
     * {
       box-sizing: border-box;
